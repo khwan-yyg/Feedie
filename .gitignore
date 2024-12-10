@@ -42,7 +42,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-*urls.ts
+
 .angular
 .vscode
 
