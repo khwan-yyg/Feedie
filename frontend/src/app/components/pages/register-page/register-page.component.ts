@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { IUserRegister } from 'src/app/shared/interfaces/IUserRegister';
-import { PasswordMatchValidator } from 'src/app/shared/validators/password_match_validator';
+import { PasswordsMatchValidator } from 'src/app/shared/validators/password_match_validator';
 
 @Component({
   selector: 'app-register-page',
@@ -15,7 +15,6 @@ export class RegisterPageComponent implements OnInit {
   isSubmitted = false;
 
   returnUrl = '';
-
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -29,13 +28,14 @@ export class RegisterPageComponent implements OnInit {
         name: ['', [Validators.required, Validators.minLength(5)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(5)]],
-        confirmPassword: ['', [Validators.required]],
+        confirmPassword: ['', Validators.required],
         address: ['', [Validators.required, Validators.minLength(10)]],
       },
       {
-        validators: PasswordMatchValidator('password', 'confirmPassword'),
+        validators: PasswordsMatchValidator('password', 'confirmPassword'),
       }
     );
+
     this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
   }
 

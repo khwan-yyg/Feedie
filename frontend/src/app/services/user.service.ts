@@ -22,6 +22,10 @@ export class UserService {
     this.userObservable = this.userSubject.asObservable();
   }
 
+  public get currentUser(): User {
+    return this.userSubject.value;
+  }
+
   login(userLogin: IUserLogin): Observable<User> {
     return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(
       tap({
@@ -29,7 +33,7 @@ export class UserService {
           this.setUserToLocalStorage(user);
           this.userSubject.next(user);
           this.toastrService.success(
-            `Welcom to Feedie ${user.name}`,
+            `Welcome to Feedie ${user.name}!`,
             'Login Successful'
           );
         },
@@ -40,8 +44,8 @@ export class UserService {
     );
   }
 
-  register(userRegister: IUserRegister): Observable<User> {
-    return this.http.post<User>(USER_REGISTER_URL, userRegister).pipe(
+  register(userRegiser: IUserRegister): Observable<User> {
+    return this.http.post<User>(USER_REGISTER_URL, userRegiser).pipe(
       tap({
         next: (user) => {
           this.setUserToLocalStorage(user);

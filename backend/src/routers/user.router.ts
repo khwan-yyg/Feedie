@@ -28,11 +28,8 @@ router.post(
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
 
-    if (user) {
-      const user = await UserModel.findOne({ email });
-      if (user && (await bcrypt.compare(password, user.password))) {
-        res.send(generateTokenReponse(user));
-      }
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.send(generateTokenReponse(user));
     } else {
       res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
     }
@@ -68,6 +65,7 @@ router.post(
 const generateTokenReponse = (user: User) => {
   const token = jwt.sign(
     {
+      id: user.id,
       email: user.email,
       isAdmin: user.isAdmin,
     },
