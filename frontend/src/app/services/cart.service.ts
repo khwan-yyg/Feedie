@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { Cart } from "../shared/models/Cart";
-import { CartItem } from "../shared/models/CartItem";
-import { Food } from "../shared/models/Food";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Cart } from '../shared/models/Cart';
+import { CartItem } from '../shared/models/CartItem';
+import { Food } from '../shared/models/Food';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class CartService {
   private cart: Cart = this.getCartFromLocalStorage();
@@ -43,6 +43,10 @@ export class CartService {
     return this.cartSubject.asObservable();
   }
 
+  getCart(): Cart {
+    return this.cartSubject.value;
+  }
+
   private setCartToLocalStorage(): void {
     this.cart.totalPrice = this.cart.items.reduce(
       (prevSum, currentItem) => prevSum + currentItem.price,
@@ -54,12 +58,12 @@ export class CartService {
     );
 
     const cartJson = JSON.stringify(this.cart);
-    localStorage.setItem("Cart", cartJson);
+    localStorage.setItem('Cart', cartJson);
     this.cartSubject.next(this.cart);
   }
 
   private getCartFromLocalStorage(): Cart {
-    const cartJson = localStorage.getItem("Cart");
+    const cartJson = localStorage.getItem('Cart');
     return cartJson ? JSON.parse(cartJson) : new Cart();
   }
 }
