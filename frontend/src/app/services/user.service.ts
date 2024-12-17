@@ -17,6 +17,7 @@ export class UserService {
     this.getUserFromLocalStorage()
   );
   public userObservable: Observable<User>;
+  static currentUser: any;
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {
     this.userObservable = this.userSubject.asObservable();
