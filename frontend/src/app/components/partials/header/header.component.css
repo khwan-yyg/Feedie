@@ -1,7 +1,8 @@
 header {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 600;
   background: white;
-  padding: 0;
   border-bottom: 1px solid #e72929;
 }
 
@@ -51,7 +52,6 @@ a span {
 
 .menu {
   position: absolute;
-  z-index: 1;
   background: whitesmoke;
   display: none;
 }
