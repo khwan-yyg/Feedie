@@ -1,3 +1,1 @@
-export const environment = {
-  BACKEND_URI: '',
-};
+export const environment = {};

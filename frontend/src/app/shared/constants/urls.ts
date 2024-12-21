@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.development';
 
 const BASE_URL = environment.BACKEND_URI || 'http://localhost:5000';
 
